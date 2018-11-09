@@ -1,4 +1,4 @@
-package tsp;
+package tsp.models;
 
 public class Town {
     
@@ -8,6 +8,16 @@ public class Town {
     private Integer longitude;
     
     public Town(){}
+    
+    public Town(String name,
+                Boolean startingTown,
+                Integer latitude,
+                Integer longitude){
+        this.name = name;
+        this.startingTown = startingTown;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
     
     public String getName(){
         return name;

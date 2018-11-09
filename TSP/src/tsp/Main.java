@@ -1,16 +1,27 @@
 package tsp;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import tsp.controllers.BasicMapController;
 
 public class Main extends Application {
     
     @Override
     public void start(Stage primaryStage) {
-        /*Button btn = new Button();
+        //createView(primaryStage);
+        
+        BasicMapController.createBasicMap();
+    }
+    
+    public void createView(Stage primaryStage){
+        Button btn = new Button();
         btn.setText("Say 'Hello World'");
         btn.setOnAction(new EventHandler<ActionEvent>() {
-            
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("Hello World!");
@@ -24,7 +35,7 @@ public class Main extends Application {
         
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
-        primaryStage.show();*/
+        primaryStage.show();
     }
 
     public static void main(String[] args) {

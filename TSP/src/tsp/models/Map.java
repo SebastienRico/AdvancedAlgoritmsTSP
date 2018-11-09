@@ -1,4 +1,4 @@
-package tsp;
+package tsp.models;
 
 import java.util.List;
 
