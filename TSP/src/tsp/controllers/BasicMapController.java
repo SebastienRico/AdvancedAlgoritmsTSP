@@ -7,10 +7,8 @@ import tsp.models.Town;
 import tsp.models.Way;
 
 public class BasicMapController {
-    
-    public static Map basicMap; 
 
-    public static void createBasicMap() {
+    public static Map createBasicMap() {
         Town townStart = new Town("Starting", true, 4, 2);
         Town townOne = new Town("One", false, 7, 5);
         Town townTwo = new Town("Two", false, 2, 5);
@@ -75,7 +73,6 @@ public class BasicMapController {
         map.setTowns(towns);
         map.setWays(ways);
         
-        basicMap = map;
-
+        return map;
     }
 }

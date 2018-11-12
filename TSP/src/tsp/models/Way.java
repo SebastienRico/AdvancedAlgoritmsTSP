@@ -5,6 +5,7 @@ public class Way {
     private Town startingTown;
     private Town arrivalTown;
     private Double distance;
+    private String color;
     
     public Way(){}
     
@@ -16,6 +17,7 @@ public class Way {
         this.distance = Math.sqrt(
                 Math.pow(2, arrivalTown.getLatitude() - startingTown.getLatitude()) +
                 Math.pow(2, arrivalTown.getLongitude() - startingTown.getLongitude()));
+        color = "BLACK";
     }
     
     public Town getStartingTown(){
@@ -40,5 +42,13 @@ public class Way {
     
     public void setDistance(Double distance){
         this.distance = distance;
+    }
+    
+    public String getColor(){
+        return color;
+    }
+    
+    public void setColor(String color){
+        this.color = color;
     }
 }

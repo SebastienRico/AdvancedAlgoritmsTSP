@@ -6,6 +6,7 @@ public class Town {
     private Boolean startingTown;
     private Integer latitude;
     private Integer longitude;
+    private String color;
     
     public Town(){}
     
@@ -17,6 +18,7 @@ public class Town {
         this.startingTown = startingTown;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.color = "BLACK";
     }
     
     public String getName(){
@@ -49,5 +51,13 @@ public class Town {
     
     public void setLongitude(Integer longitude){
         this.longitude = longitude;
+    }
+    
+    public String getColor(){
+        return color;
+    }
+    
+    public void setColor(String color){
+        this.color = color;
     }
 }
