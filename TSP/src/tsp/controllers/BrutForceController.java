@@ -9,5 +9,10 @@ public class BrutForceController implements SolutionControllerInterface{
         
     }
 
+    @Override
+    public void resolveTable(Double[][] table) {
+        
+    }
+
     
 }

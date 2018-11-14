@@ -8,7 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import tsp.controllers.AddingRemovingEdgeController;
-import tsp.controllers.BasicMapController;
+import tsp.controllers.BasicTableController;
 import tsp.controllers.BranchAndBoundController;
 import tsp.controllers.BrutForceController;
 import tsp.controllers.GeneticController;
@@ -20,16 +20,21 @@ import tsp.models.Map;
 public class Main extends Application {
     
     public static Map basicMap; 
+    public static Double[][] basicTable;
     
     @Override
     public void start(Stage primaryStage) {
+        // Création de la vue qui va afficher le graphique et les résultats
         //createView(primaryStage);
         
-        basicMap = BasicMapController.createBasicMap();
+        // création d'une carte basique (pour plus tard)
+        //basicMap = BasicMapController.createBasicMap();
+        
+        // création d'un tableau basique
+        basicTable = BasicTableController.createBasicTable();
         
         // ici vous choisissez la version à exécuter
         int version = 1;
-        
         launchGoodOneVersion(version);
     }
     
@@ -61,31 +66,31 @@ public class Main extends Application {
         switch(version){
             case 0:
                 BrutForceController brutForce = new BrutForceController();
-                brutForce.resolveMap(basicMap);
+                brutForce.resolveTable(basicTable);
                 break;
             case 1:
                 BranchAndBoundController branchAndBound = new BranchAndBoundController();
-                branchAndBound.resolveMap(basicMap);
+                branchAndBound.resolveTable(basicTable);
                 break;
             case 2:
                 AddingRemovingEdgeController addingRemovingEdge = new AddingRemovingEdgeController();
-                addingRemovingEdge.resolveMap(basicMap);
+                addingRemovingEdge.resolveTable(basicTable);
                 break;
             case 3:
                 SpanningTreeController spanningTree = new SpanningTreeController();
-                spanningTree.resolveMap(basicMap);
+                spanningTree.resolveTable(basicTable);
                 break;
             case 4:
                 GreedyController greedy = new GreedyController();
-                greedy.resolveMap(basicMap);
+                greedy.resolveTable(basicTable);
                 break;
             case 5:
                 RandomController random = new RandomController();
-                random.resolveMap(basicMap);
+                random.resolveTable(basicTable);
                 break;
             default :
                 GeneticController genetic = new GeneticController();
-                genetic.resolveMap(basicMap);
+                genetic.resolveTable(basicTable);
         }
     }
     

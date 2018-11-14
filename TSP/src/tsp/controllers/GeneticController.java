@@ -9,5 +9,10 @@ public class GeneticController implements SolutionControllerInterface{
         
     }
 
+    @Override
+    public void resolveTable(Double[][] table) {
+        
+    }
+
     
 }

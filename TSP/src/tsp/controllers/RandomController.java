@@ -9,5 +9,10 @@ public class RandomController implements SolutionControllerInterface{
         
     }
 
+    @Override
+    public void resolveTable(Double[][] table) {
+        
+    }
+
     
 }

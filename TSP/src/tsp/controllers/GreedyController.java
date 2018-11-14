@@ -9,5 +9,10 @@ public class GreedyController implements SolutionControllerInterface{
         
     }
 
+    @Override
+    public void resolveTable(Double[][] table) {
+        
+    }
+
     
 }
