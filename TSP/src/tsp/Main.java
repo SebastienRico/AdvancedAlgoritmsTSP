@@ -34,7 +34,7 @@ public class Main extends Application {
         basicTable = BasicTableController.createBasicTable();
         
         // ici vous choisissez la version à exécuter
-        int version = 1;
+        int version = 4;
         launchGoodOneVersion(version);
     }
     
