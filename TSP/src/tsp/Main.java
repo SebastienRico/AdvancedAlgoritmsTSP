@@ -8,18 +8,16 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import tsp.controllers.AddingRemovingEdgeController;
-import tsp.controllers.BasicTableController;
 import tsp.controllers.BranchAndBoundController;
 import tsp.controllers.BrutForceController;
 import tsp.controllers.GeneticController;
 import tsp.controllers.GreedyController;
+import tsp.controllers.MatriceController;
 import tsp.controllers.RandomController;
 import tsp.controllers.SpanningTreeController;
-import tsp.models.Map;
 
 public class Main extends Application {
     
-    public static Map basicMap; 
     public static Double[][] basicTable;
     
     @Override
@@ -27,11 +25,8 @@ public class Main extends Application {
         // Création de la vue qui va afficher le graphique et les résultats
         //createView(primaryStage);
         
-        // création d'une carte basique (pour plus tard)
-        //basicMap = BasicMapController.createBasicMap();
-        
         // création d'un tableau basique
-        basicTable = BasicTableController.createBasicTable();
+        basicTable = MatriceController.createBasicTable();
         
         // ici vous choisissez la version à exécuter
         int version = 4;

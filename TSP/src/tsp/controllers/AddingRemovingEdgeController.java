@@ -1,11 +1,11 @@
 package tsp.controllers;
 
-import tsp.models.Map;
+import tsp.models.Graph;
 
 public class AddingRemovingEdgeController implements SolutionControllerInterface{
 
     @Override
-    public void resolveMap(Map basicMap) {
+    public void resolveGraph(Graph basicGraph) {
         
     }
 

@@ -1,7 +1,7 @@
 package tsp.controllers;
 
 
-public class BasicTableController {
+public class MatriceController {
 
     public static Double[][] createBasicTable() {
         Double[][] table = new Double[4][4];
