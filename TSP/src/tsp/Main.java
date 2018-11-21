@@ -1,91 +1,107 @@
 package tsp;
 
+import java.io.IOException;
+import java.time.Instant;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import tsp.controllers.AddingRemovingEdgeController;
 import tsp.controllers.BranchAndBoundController;
 import tsp.controllers.BrutForceController;
 import tsp.controllers.GeneticController;
 import tsp.controllers.GreedyController;
-import tsp.controllers.MatriceController;
 import tsp.controllers.RandomController;
 import tsp.controllers.SpanningTreeController;
+import tsp.models.Graph;
+import tsp.models.Vertex;
 
 public class Main extends Application {
     
-    public static Double[][] basicTable;
+    public static Double[][] basicMatrice;
+    public static Graph basicGraph;
+    public static Vertex basicTree;
+    
+    public static long timeForResoltion;
     
     @Override
     public void start(Stage primaryStage) {
-        // Création de la vue qui va afficher le graphique et les résultats
-        //createView(primaryStage);
+        try {
+            // Création de la vue qui va afficher le graphique et les résultats
+            createView(primaryStage);
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, "Une erreur est survenue avec l'affichage", ex);
+        }
         
         // création d'un tableau basique
-        basicTable = MatriceController.createBasicTable();
         
         // ici vous choisissez la version à exécuter
-        int version = 4;
-        launchGoodOneVersion(version);
+        //int version = 4;
+        //launchGoodOneVersion(version);
     }
     
-    public void createView(Stage primaryStage){
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });
-        
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
-        
-        Scene scene = new Scene(root, 300, 250);
-        
-        primaryStage.setTitle("Hello World!");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+    public void createView(Stage stage) throws IOException{
+        // Création du visuel
+        Parent root = FXMLLoader.load(getClass().getResource("MainView.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public static void main(String[] args) {
         launch(args);
     }
 
-    private void launchGoodOneVersion(int version) {
+    public static void launchGoodOneVersion(int version, Graph graph) {
+        long begining;
         switch(version){
             case 0:
                 BrutForceController brutForce = new BrutForceController();
-                brutForce.resolveTable(basicTable);
+                begining = Date.from(Instant.now()).getTime();
+                // appeler la méthode avec le graph ou la map
+                brutForce.resolveTable(basicMatrice);
+                timeForResoltion = Date.from(Instant.now()).getTime() - begining;
                 break;
             case 1:
                 BranchAndBoundController branchAndBound = new BranchAndBoundController();
-                branchAndBound.resolveTable(basicTable);
+                begining = Date.from(Instant.now()).getTime();
+                // appeler la méthode avec le graph ou la map
+                branchAndBound.resolveTable(basicMatrice);
+                timeForResoltion = Date.from(Instant.now()).getTime() - begining;
                 break;
             case 2:
                 AddingRemovingEdgeController addingRemovingEdge = new AddingRemovingEdgeController();
-                addingRemovingEdge.resolveTable(basicTable);
+                begining = Date.from(Instant.now()).getTime();
+                addingRemovingEdge.resolveTable(basicMatrice);
+                timeForResoltion = Date.from(Instant.now()).getTime() - begining;
                 break;
             case 3:
                 SpanningTreeController spanningTree = new SpanningTreeController();
-                spanningTree.resolveTable(basicTable);
+                begining = Date.from(Instant.now()).getTime();
+                spanningTree.resolveTable(basicMatrice);
+                timeForResoltion = Date.from(Instant.now()).getTime() - begining;
                 break;
             case 4:
                 GreedyController greedy = new GreedyController();
-                greedy.resolveTable(basicTable);
+                begining = Date.from(Instant.now()).getTime();
+                greedy.resolveTable(basicMatrice);
+                timeForResoltion = Date.from(Instant.now()).getTime() - begining;
                 break;
             case 5:
                 RandomController random = new RandomController();
-                random.resolveTable(basicTable);
+                begining = Date.from(Instant.now()).getTime();
+                random.resolveTable(basicMatrice);
+                timeForResoltion = Date.from(Instant.now()).getTime() - begining;
                 break;
             default :
                 GeneticController genetic = new GeneticController();
-                genetic.resolveTable(basicTable);
+                begining = Date.from(Instant.now()).getTime();
+                genetic.resolveTable(basicMatrice);
+                timeForResoltion = Date.from(Instant.now()).getTime() - begining;
         }
     }
     
