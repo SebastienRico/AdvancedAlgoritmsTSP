@@ -18,13 +18,11 @@ import tsp.controllers.GreedyController;
 import tsp.controllers.RandomController;
 import tsp.controllers.SpanningTreeController;
 import tsp.models.Graph;
-import tsp.models.Vertex;
 
 public class Main extends Application {
     
-    public static Double[][] basicMatrice;
-    public static Graph basicGraph;
-    public static Vertex basicTree;
+    public static Double[][] matrice;
+    public static Graph graph;
     
     public static long timeForResoltion;
     
@@ -56,51 +54,56 @@ public class Main extends Application {
         launch(args);
     }
 
-    public static void launchGoodOneVersion(int version, Graph graph) {
+    public static void launchGoodOneVersion(int version) {
         long begining;
         switch(version){
             case 0:
                 BrutForceController brutForce = new BrutForceController();
                 begining = Date.from(Instant.now()).getTime();
-                // appeler la méthode avec le graph ou la map
-                brutForce.resolveTable(basicMatrice);
+                //brutForce.resolveTable(matrice);
+                brutForce.resolveGraph(graph);
                 timeForResoltion = Date.from(Instant.now()).getTime() - begining;
                 break;
             case 1:
                 BranchAndBoundController branchAndBound = new BranchAndBoundController();
                 begining = Date.from(Instant.now()).getTime();
-                // appeler la méthode avec le graph ou la map
-                branchAndBound.resolveTable(basicMatrice);
+                //branchAndBound.resolveTable(matrice);
+                branchAndBound.resolveGraph(graph);
                 timeForResoltion = Date.from(Instant.now()).getTime() - begining;
                 break;
             case 2:
                 AddingRemovingEdgeController addingRemovingEdge = new AddingRemovingEdgeController();
                 begining = Date.from(Instant.now()).getTime();
-                addingRemovingEdge.resolveTable(basicMatrice);
+                addingRemovingEdge.resolveTable(matrice);
+                //addingRemovingEdge.resolveGraph(graph);
                 timeForResoltion = Date.from(Instant.now()).getTime() - begining;
                 break;
             case 3:
                 SpanningTreeController spanningTree = new SpanningTreeController();
                 begining = Date.from(Instant.now()).getTime();
-                spanningTree.resolveTable(basicMatrice);
+                spanningTree.resolveTable(matrice);
+                //spanningTree.resolveGraph(graph);
                 timeForResoltion = Date.from(Instant.now()).getTime() - begining;
                 break;
             case 4:
                 GreedyController greedy = new GreedyController();
                 begining = Date.from(Instant.now()).getTime();
-                greedy.resolveTable(basicMatrice);
+                greedy.resolveTable(matrice);
+                //greedy.resolveGraph(graph);
                 timeForResoltion = Date.from(Instant.now()).getTime() - begining;
                 break;
             case 5:
                 RandomController random = new RandomController();
                 begining = Date.from(Instant.now()).getTime();
-                random.resolveTable(basicMatrice);
+                random.resolveTable(matrice);
+                //random.resolveGraph(graph);
                 timeForResoltion = Date.from(Instant.now()).getTime() - begining;
                 break;
             default :
                 GeneticController genetic = new GeneticController();
                 begining = Date.from(Instant.now()).getTime();
-                genetic.resolveTable(basicMatrice);
+                genetic.resolveTable(matrice);
+                //genetic.resolveGraph(graph);
                 timeForResoltion = Date.from(Instant.now()).getTime() - begining;
         }
     }

@@ -241,15 +241,18 @@ public class MainViewController implements Initializable {
             private Graph getGraph() {
                 Graph graph = new Graph();
                 if(typeOfMapsExistingMap.isSelected()){
-                    // graph = 
+                    graph = GraphController.createGraphFromFile(mapsCombobox.getSelectionModel());
                 }else /* typeOfMapsNewMap.isSelected() */{
-                    // graph = 
+                    int nbTowns = Integer.getInteger(nbTownsToGenerate.getText());
+                    graph = GraphController.createRandomGraph(nbTowns);
                 }
                 return graph;
             }
 
             private void resolveProblem(int APPROCHE, Graph graph) {
-                Main.launchGoodOneVersion(APPROCHE, graph);
+                Main.graph = graph;
+                Main.matrice = GraphController.transformeGraphToMatrice(graph);
+                Main.launchGoodOneVersion(APPROCHE);
             }
         });
     }
