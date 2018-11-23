@@ -41,7 +41,6 @@ public class GreedyController implements SolutionControllerInterface {
                             double temp_min_cost = tsptable[i][j];
                             if (temp_min_cost < min_cost) {
                                 min_cost = temp_min_cost;
-                                total_cost += min_cost;
                             }
                         }
                     }
