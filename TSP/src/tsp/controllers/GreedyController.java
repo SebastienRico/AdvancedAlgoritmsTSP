@@ -2,7 +2,7 @@ package tsp.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
-import tsp.models.Map;
+import tsp.models.Graph;
 
 public class GreedyController implements SolutionControllerInterface {
 
@@ -11,8 +11,8 @@ public class GreedyController implements SolutionControllerInterface {
 
     //PLus besoin de cette map.
     @Override
-    public void resolveMap(Map basicMap) {
-
+    public void resolveGraph(Graph basicGraph) {
+        
     }
 
     @Override

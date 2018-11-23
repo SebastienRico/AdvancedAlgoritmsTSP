@@ -1,11 +1,11 @@
 package tsp.controllers;
 
-import tsp.models.Map;
+import tsp.models.Graph;
 
 public class BrutForceController implements SolutionControllerInterface{
 
     @Override
-    public void resolveMap(Map basicMap) {
+    public void resolveGraph(Graph basicGraph) {
         
     }
 
@@ -13,6 +13,4 @@ public class BrutForceController implements SolutionControllerInterface{
     public void resolveTable(Double[][] table) {
         
     }
-
-    
 }
