@@ -1,10 +1,10 @@
 package tsp.controllers;
 
-import tsp.models.Map;
+import tsp.models.Graph;
 
 public interface SolutionControllerInterface {
     
-    public void resolveMap(Map basicMap);
+    public void resolveGraph(Graph basicGraph);
     
     public void resolveTable(Double[][] table);
 }
