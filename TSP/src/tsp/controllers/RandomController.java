@@ -20,10 +20,11 @@ public class RandomController implements SolutionControllerInterface {
         Double weight = 0.0;
         int length = table[0].length;
         ArrayList<Integer> path = new ArrayList<>();
+        int firstVertex;
         int random1;
         int random2=0;
         random1 = (int) ((Math.random() * 1000 * length) % length);
-
+        firstVertex=random1;
         path.add(random1);
         for (int i = 1; i < length; i++) {
 
@@ -41,7 +42,8 @@ public class RandomController implements SolutionControllerInterface {
             random1 = random2;
 
         }
-
+        path.add(firstVertex);
+        weight+= table[random2][firstVertex];
         System.out.println("Path : " + path.toString() + ", Weight : " + weight);
 
     }
