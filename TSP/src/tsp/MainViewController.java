@@ -1,6 +1,8 @@
 package tsp;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -44,6 +46,7 @@ public class MainViewController implements Initializable {
     private final String GENETIC = "Genetic";
     
     private final String RESOLVE = "Resolve";
+    private final String RESOLVE_ALL = "Try all";
     
     private final String DESCRIPTION_BRUT_FORCE = "Description Brut force";
     private final String DESCRIPTION_BRANCH_BOUND = "Description Branch and bound";
@@ -107,20 +110,11 @@ public class MainViewController implements Initializable {
     private ToggleGroup approchesChoices;
     @FXML
     private TextArea description;
+    @FXML
+    private Button solverAllBtn;
     
-    private Boolean choiceMap;
-    private Boolean choiceApproche;
-            
-    ObservableList<String> mapsComboboxOptions = FXCollections.observableArrayList(
-            "Small map",
-            "Medium map",
-            "Large map"
-        );
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        choiceMap = false;
-        choiceApproche = false;
         
         mainTitle.setText(MAIN_TITLE);
         autors.setText(AUTORS);
@@ -135,6 +129,8 @@ public class MainViewController implements Initializable {
         typeOfMapsNewMap.setToggleGroup(typeOfMaps);
         
         mapsCombobox.setPromptText(CHOOSE_YOUR_MAP);
+        List<String> files = FileController.getAllFileNames();
+        ObservableList<String> mapsComboboxOptions = FXCollections.observableArrayList(files);
         mapsCombobox.setItems(mapsComboboxOptions);
         
         nbTownsToGenerate.setPromptText(NUMBER_OF_TOWNS);
@@ -157,19 +153,18 @@ public class MainViewController implements Initializable {
         approchesChoicesGenetic.setToggleGroup(approchesChoices);
         
         solverBtn.setText(RESOLVE);
+        solverAllBtn.setText(RESOLVE_ALL);
         
         typeOfMaps.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             @Override
             public void changed(ObservableValue<? extends Toggle> arg0, Toggle arg1, Toggle arg2) {
                 if(typeOfMapsExistingMap.isSelected()){
                     nbTownsToGenerate.setDisable(true);
-                    choiceMap = true;
                 }else{
                     nbTownsToGenerate.setDisable(false);
                 }
                 if(typeOfMapsNewMap.isSelected()){
                     mapsCombobox.setDisable(true);
-                    choiceMap = true;
                 }else{
                     mapsCombobox.setDisable(false);
                 }
@@ -183,31 +178,31 @@ public class MainViewController implements Initializable {
                     Toggle arg1, Toggle arg2) {
                 if(approchesChoicesBrutForce.isSelected()){
                     description.setText(DESCRIPTION_BRUT_FORCE);
-                    choiceApproche = true;//solverBtn.setDisable(false);
+                    solverBtn.setDisable(false);
                 }else if(approchesChoicesBranchBound.isSelected()){
                     description.setText(DESCRIPTION_BRANCH_BOUND);
-                    choiceApproche = true;//solverBtn.setDisable(false);
+                    solverBtn.setDisable(false);
                 }else if(approchesChoicesAddingRemoving.isSelected()){
                     description.setText(DESCRIPTION_ADDING_REMOVING);
-                    choiceApproche = true;//solverBtn.setDisable(false);
+                    solverBtn.setDisable(false);
                 }else if(approchesChoicesSpanningTree.isSelected()){
                     description.setText(DESCRIPTION_SPANNING_TREE);
-                    choiceApproche = true;//solverBtn.setDisable(false);
+                    solverBtn.setDisable(false);
                 }else if(approchesChoicesGreedy.isSelected()){
                     description.setText(DESCRIPTION_GREEDY);
-                    choiceApproche = true;//solverBtn.setDisable(false);
+                    solverBtn.setDisable(false);
                 }else if(approchesChoicesDynamic.isSelected()){
                     description.setText(DESCRIPTION_DYNAMIC);
-                    choiceApproche = true;//solverBtn.setDisable(false);
+                    solverBtn.setDisable(false);
                 }else if(approchesChoicesRandom.isSelected()){
                     description.setText(DESCRIPTION_RANDOM);
-                    choiceApproche = true;//solverBtn.setDisable(false);
+                    solverBtn.setDisable(false);
                 }else if(approchesChoicesGenetic.isSelected()){
                     description.setText(DESCRIPTION_GENETIC);
-                    choiceApproche = true;//solverBtn.setDisable(false);
+                    solverBtn.setDisable(false);
                 }else{
                     description.setText("");
-                    choiceApproche = false;//solverBtn.setDisable(true);
+                    solverBtn.setDisable(true);
                 }
             }
         });
@@ -215,27 +210,57 @@ public class MainViewController implements Initializable {
         solverBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(choiceApproche && choiceMap){
-                    Graph graph = new Graph();
-                    graph = getGraph();
-                    if(approchesChoicesBrutForce.isSelected()){
-                        resolveProblem(BRUT_FORCE_APPROCHE, graph);
-                    }else if(approchesChoicesBranchBound.isSelected()){
-                        resolveProblem(BRANCH_BOUND_APPROCHE, graph);
-                    }else if(approchesChoicesAddingRemoving.isSelected()){
-                        resolveProblem(ADDING_REMOVING_EDGES_APPROCHE, graph);
-                    }else if(approchesChoicesSpanningTree.isSelected()){
-                        resolveProblem(SPANNING_TREE_APPROCHE, graph);
-                    }else if(approchesChoicesGreedy.isSelected()){
-                        resolveProblem(GREEDY_APPROCHE, graph);
-                    }else if(approchesChoicesDynamic.isSelected()){
-                        resolveProblem(DYNAMIC_APPROCHE, graph);
-                    }else if(approchesChoicesRandom.isSelected()){
-                        resolveProblem(RANDOM_APPROCHE, graph);
-                    }else if(approchesChoicesGenetic.isSelected()){
-                        resolveProblem(GENETIC_APPROCHE, graph);
-                    }
+                Graph graph = getGraph();
+                if(approchesChoicesBrutForce.isSelected()){
+                    resolveProblem(BRUT_FORCE_APPROCHE, graph);
+                }else if(approchesChoicesBranchBound.isSelected()){
+                    resolveProblem(BRANCH_BOUND_APPROCHE, graph);
+                }else if(approchesChoicesAddingRemoving.isSelected()){
+                    resolveProblem(ADDING_REMOVING_EDGES_APPROCHE, graph);
+                }else if(approchesChoicesSpanningTree.isSelected()){
+                    resolveProblem(SPANNING_TREE_APPROCHE, graph);
+                }else if(approchesChoicesGreedy.isSelected()){
+                    resolveProblem(GREEDY_APPROCHE, graph);
+                }else if(approchesChoicesDynamic.isSelected()){
+                    resolveProblem(DYNAMIC_APPROCHE, graph);
+                }else if(approchesChoicesRandom.isSelected()){
+                    resolveProblem(RANDOM_APPROCHE, graph);
+                }else if(approchesChoicesGenetic.isSelected()){
+                    resolveProblem(GENETIC_APPROCHE, graph);
                 }
+            }
+
+            private Graph getGraph() {
+                Graph graph = new Graph();
+                if(typeOfMapsExistingMap.isSelected()){
+                    graph = GraphController.createGraphFromFile(mapsCombobox.getSelectionModel());
+                }else /* typeOfMapsNewMap.isSelected() */{
+                    int nbTowns = Integer.getInteger(nbTownsToGenerate.getText());
+                    graph = GraphController.createRandomGraph(nbTowns);
+                }
+                return graph;
+            }
+
+            private void resolveProblem(int APPROCHE, Graph graph) {
+                Main.graph = graph;
+                Main.matrice = GraphController.transformeGraphToMatrice(graph);
+                Main.launchGoodOneVersion(APPROCHE);
+            }
+        });
+        
+        solverAllBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Graph graph = getGraph();
+                resolveProblem(BRUT_FORCE_APPROCHE, graph);
+                resolveProblem(BRANCH_BOUND_APPROCHE, graph);
+                resolveProblem(ADDING_REMOVING_EDGES_APPROCHE, graph);
+                resolveProblem(SPANNING_TREE_APPROCHE, graph);
+                resolveProblem(GREEDY_APPROCHE, graph);
+                resolveProblem(DYNAMIC_APPROCHE, graph);
+                resolveProblem(RANDOM_APPROCHE, graph);
+                resolveProblem(GENETIC_APPROCHE, graph);
+                // plotComparingGraph();
             }
 
             private Graph getGraph() {

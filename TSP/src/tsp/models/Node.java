@@ -8,7 +8,9 @@ public class Node {
     private Integer y;
     private String color;
     
-    public Node(){}
+    public Node(){
+        this.color = "BLACK";
+    }
     
     public Node(Integer id,
                 Boolean startingNode,

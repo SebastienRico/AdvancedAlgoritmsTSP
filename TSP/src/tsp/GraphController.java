@@ -1,8 +1,11 @@
 package tsp;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.control.SingleSelectionModel;
 import tsp.models.Graph;
 import tsp.models.Node;
@@ -43,7 +46,15 @@ public class GraphController {
     }
 
     public static Double[][] transformeGraphToMatrice(Graph graph) {
-        Double[][] matrice = null;
+        if(graph == null){
+            try {
+                throw new Exception();
+            } catch (Exception ex) {
+                Logger.getLogger(GraphController.class.getName()).log(Level.SEVERE, "GraphController.transformeGraphToMatrice : Le graph est null", ex);
+            }
+        }
+        int size = graph.getNodes().size();
+        Double[][] matrice = new Double[size][size];
         graph.getPaths().forEach(p -> {
             matrice[p.getStartingNode().getId()][p.getArrivalNode().getId()] = p.getDistance();
         });
@@ -51,8 +62,8 @@ public class GraphController {
     }
 
     public static Graph createGraphFromFile(SingleSelectionModel<String> selectionModel) {
-        Graph graph = new Graph();
-        // parser le fichier passé en paramètre et le convertir en graph
+        Parseur parseur = new Parseur();
+        Graph graph = parseur.graphFromFile(selectionModel.getSelectedItem());
         return graph;
     }
     
