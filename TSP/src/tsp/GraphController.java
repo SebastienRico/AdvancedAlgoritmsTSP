@@ -18,14 +18,14 @@ public class GraphController {
         List<Node> nodes = new ArrayList<>();
         List<Path> paths = new ArrayList<>();
         // crée de façon random des villes et les ajoute à la liste de "nodes"
-        for(int i = 0; i < nbTowns; i++){
+        for(int i = 1; i <= nbTowns; i++){
             Boolean startingNode = false;
-            if(i == 0){
+            if(i == 1){
                 startingNode = true;
             }
             Random r = new Random();
-            int x = r.nextInt(1000);
-            int y = r.nextInt(1000);
+            Integer x = r.nextInt(1000);
+            Integer y = r.nextInt(1000);
             Node n = new Node(i, startingNode, x, y);
             nodes.add(n);
         }
@@ -45,18 +45,21 @@ public class GraphController {
         return graph;
     }
 
-    public static Double[][] transformeGraphToMatrice(Graph graph) {
-        if(graph == null){
-            try {
-                throw new Exception();
-            } catch (Exception ex) {
-                Logger.getLogger(GraphController.class.getName()).log(Level.SEVERE, "GraphController.transformeGraphToMatrice : Le graph est null", ex);
-            }
+    public static Double[][] transformeGraphToMatrice(Graph graph) throws Exception {
+        if(graph != null){
+            throw new Exception();
         }
         int size = graph.getNodes().size();
+        
+        System.out.println("Taille de la matrice : " + size);
+        
         Double[][] matrice = new Double[size][size];
         graph.getPaths().forEach(p -> {
-            matrice[p.getStartingNode().getId()][p.getArrivalNode().getId()] = p.getDistance();
+            int x = p.getStartingNode().getId()-1;
+            int y = p.getArrivalNode().getId()-1;
+            matrice[p.getStartingNode().getId()-1][p.getArrivalNode().getId()-1] = p.getDistance();
+            
+            System.out.println("Matrice [" + x + "][" + y + "] = " + p.getDistance());
         });
         return matrice;
     }

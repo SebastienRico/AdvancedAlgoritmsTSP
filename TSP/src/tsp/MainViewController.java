@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -243,7 +245,11 @@ public class MainViewController implements Initializable {
 
             private void resolveProblem(int APPROCHE, Graph graph) {
                 Main.graph = graph;
-                Main.matrice = GraphController.transformeGraphToMatrice(graph);
+                try {
+                    Main.matrice = GraphController.transformeGraphToMatrice(graph);
+                } catch (Exception ex) {
+                    Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 Main.launchGoodOneVersion(APPROCHE);
             }
         });
@@ -276,7 +282,11 @@ public class MainViewController implements Initializable {
 
             private void resolveProblem(int APPROCHE, Graph graph) {
                 Main.graph = graph;
-                Main.matrice = GraphController.transformeGraphToMatrice(graph);
+                try {
+                    Main.matrice = GraphController.transformeGraphToMatrice(graph);
+                } catch (Exception ex) {
+                    Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 Main.launchGoodOneVersion(APPROCHE);
             }
         });

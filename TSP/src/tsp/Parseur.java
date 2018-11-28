@@ -19,35 +19,56 @@ public class Parseur {
             File file = FileController.getFileWithName(selectedItem);
             Scanner scanner = new Scanner(file);
             List<Node> nodes = new ArrayList<>();
-            while (scanner.hasNextLine()) {
+            Boolean startOfTheGraph = false;
+            while (scanner.hasNextLine() && !scanner.nextLine().equalsIgnoreCase("EOF")) {
                 String line = scanner.nextLine();
-                String[] lineSplited = line.split(" ");
-                List<Integer> node = new ArrayList<>();
-                for(int i = 0; i < lineSplited.length; i++){
-                    if(!lineSplited[i].isEmpty()){
-                        try {
-                            node.add(Integer.parseInt(lineSplited[i]));
-                        } catch(NumberFormatException ex){
-                            break;
+                if (startOfTheGraph) {
+                    System.out.println("Line : " + line);
+
+                    String[] lineSplited = line.split(" ");
+                    List<Integer> node = new ArrayList<>();
+                    for (int i = 0; i < lineSplited.length; i++) {
+                        System.out.println("lineSplited[" + i + "] : " + lineSplited[i]);
+                        if (lineSplited[i] != "' '") {
+                            try {
+                                node.add(Integer.parseInt(lineSplited[i]));
+                            } catch (NumberFormatException ex) {
+                                break;
+                            }
                         }
                     }
+
+                    System.out.println("Liste de node : " + node.toString());
+
+                    if (node.size() == 3) {
+                        Node n = new Node();
+                        n.setName(Integer.parseInt(node.get(0).toString()));
+                        n.setX(node.get(1));
+                        n.setY(node.get(2));
+
+                        System.out.println("Node : " + node.get(0) + " x : " + node.get(1) + " y : " + node.get(2));
+
+                        nodes.add(n);
+                    }
                 }
-                if(node.size() == 3){
-                    Node n = new Node();
-                    n.setName(node.get(0));
-                    n.setX(node.get(1));
-                    n.setY(node.get(2));
-                    nodes.add(n);
+                if (line.equals("NODE_COORD_SECTION")) {
+                    startOfTheGraph = true;
                 }
             }
+
+            System.out.println("Liste de nodes : " + nodes.toString());
+
             nodes.get(0).setStartingNode(true);
             List<Path> paths = new ArrayList<>();
             nodes.forEach(n -> {
-                for(int j = 0; j < nodes.size(); j++){
+                for (int j = 0; j < nodes.size(); j++) {
                     Path p = new Path(n, nodes.get(j));
-                    if(nodes.indexOf(n) == j){
+                    if (nodes.indexOf(n) == j) {
                         p.setDistance(Double.POSITIVE_INFINITY);
                     }
+
+                    System.out.println("Path de " + p.getStartingNode().getId() + " a " + p.getArrivalNode().getId() + " : " + p.getDistance());
+
                     paths.add(p);
                 }
             });
@@ -59,5 +80,5 @@ public class Parseur {
         }
         return graph;
     }
-    
+
 }
