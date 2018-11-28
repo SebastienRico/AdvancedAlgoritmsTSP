@@ -20,15 +20,12 @@ public class Parseur {
             Scanner scanner = new Scanner(file);
             List<Node> nodes = new ArrayList<>();
             Boolean startOfTheGraph = false;
-            while (scanner.hasNextLine() && !scanner.nextLine().equalsIgnoreCase("EOF")) {
+            while (scanner.hasNextLine() && !scanner.toString().equalsIgnoreCase("EOF")) {
                 String line = scanner.nextLine();
                 if (startOfTheGraph) {
-                    System.out.println("Line : " + line);
-
                     String[] lineSplited = line.split(" ");
                     List<Integer> node = new ArrayList<>();
                     for (int i = 0; i < lineSplited.length; i++) {
-                        System.out.println("lineSplited[" + i + "] : " + lineSplited[i]);
                         if (lineSplited[i] != "' '") {
                             try {
                                 node.add(Integer.parseInt(lineSplited[i]));
@@ -37,17 +34,11 @@ public class Parseur {
                             }
                         }
                     }
-
-                    System.out.println("Liste de node : " + node.toString());
-
                     if (node.size() == 3) {
                         Node n = new Node();
                         n.setName(Integer.parseInt(node.get(0).toString()));
                         n.setX(node.get(1));
                         n.setY(node.get(2));
-
-                        System.out.println("Node : " + node.get(0) + " x : " + node.get(1) + " y : " + node.get(2));
-
                         nodes.add(n);
                     }
                 }

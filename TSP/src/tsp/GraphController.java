@@ -24,8 +24,8 @@ public class GraphController {
                 startingNode = true;
             }
             Random r = new Random();
-            Integer x = r.nextInt(1000);
-            Integer y = r.nextInt(1000);
+            Integer x = r.nextInt(nbTowns * 10);
+            Integer y = r.nextInt(nbTowns * 10);
             Node n = new Node(i, startingNode, x, y);
             nodes.add(n);
         }
@@ -46,7 +46,7 @@ public class GraphController {
     }
 
     public static Double[][] transformeGraphToMatrice(Graph graph) throws Exception {
-        if(graph != null){
+        if(graph == null){
             throw new Exception();
         }
         int size = graph.getNodes().size();

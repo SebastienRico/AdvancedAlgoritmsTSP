@@ -237,7 +237,7 @@ public class MainViewController implements Initializable {
                 if(typeOfMapsExistingMap.isSelected()){
                     graph = GraphController.createGraphFromFile(mapsCombobox.getSelectionModel());
                 }else /* typeOfMapsNewMap.isSelected() */{
-                    int nbTowns = Integer.getInteger(nbTownsToGenerate.getText());
+                    Integer nbTowns = Integer.parseInt(nbTownsToGenerate.getText());
                     graph = GraphController.createRandomGraph(nbTowns);
                 }
                 return graph;
