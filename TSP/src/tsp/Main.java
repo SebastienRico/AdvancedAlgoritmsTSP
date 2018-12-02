@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import tsp.controllers.AddingRemovingEdgeController;
 import tsp.controllers.BranchAndBoundController;
 import tsp.controllers.BrutForceController;
+import tsp.controllers.DynamicProgrammingController;
 import tsp.controllers.GeneticController;
 import tsp.controllers.GreedyController;
 import tsp.controllers.RandomController;
@@ -98,6 +99,12 @@ public class Main extends Application {
                 begining = Date.from(Instant.now()).getTime();
                 random.resolveTable(matrice);
                 //random.resolveGraph(graph);
+                timeForResoltion = Date.from(Instant.now()).getTime() - begining;
+                break;
+            case 6 :
+                DynamicProgrammingController dynamic = new DynamicProgrammingController();
+                begining = Date.from(Instant.now()).getTime();
+                dynamic.resolveTable(matrice);
                 timeForResoltion = Date.from(Instant.now()).getTime() - begining;
                 break;
             default :
