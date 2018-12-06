@@ -37,10 +37,10 @@ public class Main extends Application {
         }
         
         // création d'un tableau basique
+        matrice = MatriceController.createBasicMatrice();
         
         // ici vous choisissez la version à exécuter
-
-        //int version = 5;
+        //int version = 1;
         //launchGoodOneVersion(version);
     }
     
@@ -69,8 +69,8 @@ public class Main extends Application {
             case 1:
                 BranchAndBoundController branchAndBound = new BranchAndBoundController();
                 begining = Date.from(Instant.now()).getTime();
-                //branchAndBound.resolveTable(matrice);
-                branchAndBound.resolveGraph(graph);
+                branchAndBound.resolveTable(matrice);
+                //branchAndBound.resolveGraph(graph);
                 timeForResoltion = Date.from(Instant.now()).getTime() - begining;
                 break;
             case 2:
