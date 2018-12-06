@@ -22,10 +22,13 @@ import tsp.models.Graph;
 
 public class Main extends Application {
     
+    private Parent root;
+    
     public static Double[][] matrice;
     public static Graph graph;
     
     public static long timeForResoltion;
+    public static String path;
     
     @Override
     public void start(Stage primaryStage) {
@@ -46,7 +49,7 @@ public class Main extends Application {
     
     public void createView(Stage stage) throws IOException{
         // Création du visuel
-        Parent root = FXMLLoader.load(getClass().getResource("MainView.fxml"));
+        root = FXMLLoader.load(getClass().getResource("MainView.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -58,6 +61,7 @@ public class Main extends Application {
 
     public static void launchGoodOneVersion(int version) {
         long begining;
+        StringBuilder s = new StringBuilder();
         switch(version){
             case 0:
                 BrutForceController brutForce = new BrutForceController();
@@ -65,6 +69,13 @@ public class Main extends Application {
                 //brutForce.resolveTable(matrice);
                 brutForce.resolveGraph(graph);
                 timeForResoltion = Date.from(Instant.now()).getTime() - begining;
+                s.append("PATH : ");
+                brutForce.optimalPath.forEach(n -> {
+                    s.append(n.toString());
+                });
+                path = s.toString();
+                System.out.println("TIME : " + timeForResoltion + " millisecondes");
+                System.out.println(path);
                 break;
             case 1:
                 BranchAndBoundController branchAndBound = new BranchAndBoundController();
@@ -72,6 +83,13 @@ public class Main extends Application {
                 branchAndBound.resolveTable(matrice);
                 //branchAndBound.resolveGraph(graph);
                 timeForResoltion = Date.from(Instant.now()).getTime() - begining;
+                s.append("PATH : ");
+                branchAndBound.noeudDejaVisite.forEach(n -> {
+                    s.append(n.getIdVertex());
+                });
+                path = s.toString();
+                System.out.println("TIME : " + timeForResoltion + " millisecondes");
+                System.out.println(path);
                 break;
             case 2:
                 AddingRemovingEdgeController addingRemovingEdge = new AddingRemovingEdgeController();

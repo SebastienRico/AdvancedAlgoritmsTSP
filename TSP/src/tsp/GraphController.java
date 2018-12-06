@@ -1,11 +1,8 @@
 package tsp;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.scene.control.SingleSelectionModel;
 import tsp.models.Graph;
 import tsp.models.Node;
@@ -51,15 +48,12 @@ public class GraphController {
         }
         int size = graph.getNodes().size();
         
-        System.out.println("Taille de la matrice : " + size);
-        
         Double[][] matrice = new Double[size][size];
         graph.getPaths().forEach(p -> {
             int x = p.getStartingNode().getId()-1;
             int y = p.getArrivalNode().getId()-1;
             matrice[p.getStartingNode().getId()-1][p.getArrivalNode().getId()-1] = p.getDistance();
             
-            System.out.println("Matrice [" + x + "][" + y + "] = " + p.getDistance());
         });
         return matrice;
     }
