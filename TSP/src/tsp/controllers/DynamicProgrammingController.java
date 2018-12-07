@@ -5,6 +5,8 @@ import tsp.models.Graph;
 
 public class DynamicProgrammingController implements SolutionControllerInterface {
 
+    public ArrayList<String> path = new ArrayList();
+    public Double weight;
 
     @Override
     public void resolveGraph(Graph basicGraph) {
@@ -14,9 +16,7 @@ public class DynamicProgrammingController implements SolutionControllerInterface
     @Override
     public void resolveTable(Double[][] table) {
         int vertex;
-        Double weight;
         ArrayList<String> remainingVertices = new ArrayList<>();
-        ArrayList<String> path = new ArrayList();
         for (int i = 0; i < table.length; i++) {
             remainingVertices.add(i + "");
         }

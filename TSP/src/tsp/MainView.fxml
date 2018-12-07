@@ -11,41 +11,39 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.191" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tsp.MainViewController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/8.0.191" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tsp.MainViewController">
    <children>
       <GridPane prefHeight="594.0" prefWidth="1000.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints maxHeight="291.0" minHeight="10.0" prefHeight="66.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="537.0" minHeight="10.0" prefHeight="528.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="291.0" minHeight="10.0" prefHeight="139.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="537.0" minHeight="10.0" prefHeight="455.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <GridPane>
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="520.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label fx:id="mainTitle" alignment="CENTER" contentDisplay="CENTER" prefHeight="33.0" prefWidth="1008.0" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Label fx:id="mainTitle" alignment="CENTER" contentDisplay="CENTER" prefHeight="33.0" prefWidth="1008.0" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font></Label>
-                  <Label fx:id="autors" alignment="CENTER" contentDisplay="CENTER" prefHeight="33.0" prefWidth="1017.0" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                  <Label fx:id="autors" alignment="CENTER" contentDisplay="CENTER" prefHeight="72.0" prefWidth="520.0" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                </children>
             </GridPane>
             <GridPane GridPane.rowIndex="1">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="485.0" minWidth="10.0" prefWidth="301.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="709.0" minWidth="10.0" prefWidth="679.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -59,8 +57,6 @@
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -115,11 +111,6 @@
                               <Insets left="10.0" right="10.0" />
                            </GridPane.margin>
                         </RadioButton>
-                        <Label fx:id="resultTitle" prefHeight="17.0" prefWidth="258.0" GridPane.columnSpan="2" GridPane.rowIndex="11">
-                           <GridPane.margin>
-                              <Insets left="10.0" right="10.0" />
-                           </GridPane.margin>
-                        </Label>
                         <RadioButton fx:id="approchesChoicesBrutForce" mnemonicParsing="false" wrapText="true" GridPane.rowIndex="4">
                            <toggleGroup>
                               <ToggleGroup fx:id="approchesChoices" />
@@ -168,11 +159,6 @@
                               <Insets left="10.0" right="10.0" />
                            </GridPane.margin>
                         </TextArea>
-                        <TextField fx:id="result" disable="true" GridPane.rowIndex="12">
-                           <GridPane.margin>
-                              <Insets left="10.0" right="10.0" />
-                           </GridPane.margin>
-                        </TextField>
                         <Button fx:id="solverAllBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="253.0" GridPane.rowIndex="10">
                            <GridPane.margin>
                               <Insets left="10.0" right="10.0" />
@@ -180,7 +166,6 @@
                         </Button>
                      </children>
                   </GridPane>
-                  <Pane fx:id="graphPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
                </children>
                <GridPane.margin>
                   <Insets left="10.0" right="10.0" />

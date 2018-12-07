@@ -9,11 +9,11 @@ import tsp.models.Permutations;
 public class BrutForceController implements SolutionControllerInterface{
     
     public ArrayList optimalPath = new ArrayList();
+    public double min =999899999;
 
     @Override
     public void resolveGraph(Graph graph) {
         int size = graph.getNodes().size();
-        double  min =999899999;
         int[] indices;
         ArrayList<String> elements = new ArrayList<>();
         for(int i=0;i<graph.getNodes().size();i++){

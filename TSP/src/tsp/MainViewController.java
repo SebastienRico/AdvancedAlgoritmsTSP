@@ -1,6 +1,7 @@
 package tsp;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -30,7 +31,6 @@ public class MainViewController implements Initializable {
     private final String MAPS_TITLE = "MAPS";
     private final String APPROCHES_TITLE = "RESOLVING APPROCHES";
     private final String DESCRIPTION_TITLE = "Description of the approche";
-    private final String RESULT_TITLE = "Result";
     
     private final String EXISTING_MAP = "Existing map";
     private final String NEW_MAP = "New map";
@@ -78,8 +78,6 @@ public class MainViewController implements Initializable {
     @FXML
     private Label descriptionTitle;
     @FXML
-    private Label resultTitle;
-    @FXML
     private ComboBox<String> mapsCombobox;
     @FXML
     private RadioButton typeOfMapsExistingMap;
@@ -87,8 +85,6 @@ public class MainViewController implements Initializable {
     private RadioButton typeOfMapsNewMap;
     @FXML
     private TextField nbTownsToGenerate;
-    @FXML
-    private TextField result;
     @FXML
     private RadioButton approchesChoicesBrutForce;
     @FXML
@@ -124,7 +120,6 @@ public class MainViewController implements Initializable {
         mapsTitle.setText(MAPS_TITLE);
         approchesTitle.setText(APPROCHES_TITLE);
         descriptionTitle.setText(DESCRIPTION_TITLE);
-        resultTitle.setText(RESULT_TITLE);
         
         typeOfMapsExistingMap.setText(EXISTING_MAP);
         typeOfMapsExistingMap.setToggleGroup(typeOfMaps);
@@ -259,15 +254,15 @@ public class MainViewController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 Graph graph = getGraph();
-                resolveProblem(BRUT_FORCE_APPROCHE, graph);
-                resolveProblem(BRANCH_BOUND_APPROCHE, graph);
-                //resolveProblem(ADDING_REMOVING_EDGES_APPROCHE, graph);
-                //resolveProblem(SPANNING_TREE_APPROCHE, graph);
-                resolveProblem(GREEDY_APPROCHE, graph);
-                resolveProblem(DYNAMIC_APPROCHE, graph);
-                resolveProblem(RANDOM_APPROCHE, graph);
-                //resolveProblem(GENETIC_APPROCHE, graph);
-                // plotComparingGraph();
+                List<Integer> approches = new ArrayList<>();
+                approches.add(BRUT_FORCE_APPROCHE);
+                approches.add(BRANCH_BOUND_APPROCHE);
+                approches.add(GREEDY_APPROCHE);
+                approches.add(DYNAMIC_APPROCHE);
+                approches.add(RANDOM_APPROCHE);
+                approches.forEach(approche ->{
+                    resolveProblem(approche, graph);
+                });
             }
 
             private Graph getGraph() {
@@ -275,7 +270,7 @@ public class MainViewController implements Initializable {
                 if(typeOfMapsExistingMap.isSelected()){
                     graph = GraphController.createGraphFromFile(mapsCombobox.getSelectionModel());
                 }else /* typeOfMapsNewMap.isSelected() */{
-                    int nbTowns = Integer.getInteger(nbTownsToGenerate.getText());
+                    Integer nbTowns = Integer.parseInt(nbTownsToGenerate.getText());
                     graph = GraphController.createRandomGraph(nbTowns);
                 }
                 return graph;
@@ -291,7 +286,5 @@ public class MainViewController implements Initializable {
                 Main.launchGoodOneVersion(APPROCHE);
             }
         });
-        
-        result.setText(Main.timeForResoltion + " / " + Main.path);
     }
 }

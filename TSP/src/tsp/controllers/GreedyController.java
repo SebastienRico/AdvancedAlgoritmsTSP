@@ -6,8 +6,8 @@ import tsp.models.Graph;
 
 public class GreedyController implements SolutionControllerInterface {
 
-    List<Integer> visited = new ArrayList<>();
-    double total_cost = 0;
+    public List<Integer> visited = new ArrayList<>();
+    public double total_cost = 0;
 
     //PLus besoin de cette map.
     @Override
@@ -47,7 +47,7 @@ public class GreedyController implements SolutionControllerInterface {
                     currentCity = nextCity;
                     total_cost += min_cost;
                     min_cost = Double.POSITIVE_INFINITY;
-                    System.out.println(getPath());
+                    //System.out.println(getPath());
                 }
             }
         }
@@ -55,7 +55,7 @@ public class GreedyController implements SolutionControllerInterface {
     }
 
     public String getPath() {
-        return "Path: " + visited.toString() + "Cost: " + total_cost;
+        return visited.toString();
     }
 
 }

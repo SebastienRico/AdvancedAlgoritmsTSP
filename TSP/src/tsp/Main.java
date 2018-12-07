@@ -62,29 +62,32 @@ public class Main extends Application {
     public static void launchGoodOneVersion(int version) {
         long begining;
         StringBuilder s = new StringBuilder();
+        System.out.println("");
         switch(version){
             case 0:
+                System.out.println("BRUT FORCE");
                 BrutForceController brutForce = new BrutForceController();
                 begining = Date.from(Instant.now()).getTime();
                 //brutForce.resolveTable(matrice);
                 brutForce.resolveGraph(graph);
                 timeForResoltion = Date.from(Instant.now()).getTime() - begining;
-                s.append("PATH : ");
                 brutForce.optimalPath.forEach(n -> {
                     s.append(n.toString());
                 });
                 path = s.toString();
                 System.out.println("TIME : " + timeForResoltion + " millisecondes");
                 System.out.println(path);
+                System.out.println("COST : " + brutForce.min);
                 break;
             case 1:
+                System.out.println("BRANCH AND BOUND");
                 BranchAndBoundController branchAndBound = new BranchAndBoundController();
                 begining = Date.from(Instant.now()).getTime();
                 branchAndBound.resolveTable(matrice);
                 //branchAndBound.resolveGraph(graph);
                 timeForResoltion = Date.from(Instant.now()).getTime() - begining;
                 s.append("PATH : ");
-                branchAndBound.noeudDejaVisite.forEach(n -> {
+                branchAndBound.nodesVisited.forEach(n -> {
                     s.append(n.getIdVertex());
                 });
                 path = s.toString();
@@ -106,24 +109,39 @@ public class Main extends Application {
                 timeForResoltion = Date.from(Instant.now()).getTime() - begining;
                 break;
             case 4:
+                System.out.println("GREEDY");
                 GreedyController greedy = new GreedyController();
                 begining = Date.from(Instant.now()).getTime();
                 greedy.resolveTable(matrice);
                 //greedy.resolveGraph(graph);
                 timeForResoltion = Date.from(Instant.now()).getTime() - begining;
+                path = greedy.getPath();
+                System.out.println("TIME : " + timeForResoltion + " millisecondes");
+                System.out.println("PATH : " + path);
+                System.out.println("COST : " + greedy.total_cost);
                 break;
             case 5:
+                System.out.println("RANDOM");
                 RandomController random = new RandomController();
                 begining = Date.from(Instant.now()).getTime();
                 random.resolveTable(matrice);
                 //random.resolveGraph(graph);
                 timeForResoltion = Date.from(Instant.now()).getTime() - begining;
+                System.out.println("TIME : " + timeForResoltion + " millisecondes");
+                path = random.path.toString();
+                System.out.println("PATH : " + path);
+                System.out.println("COST : " + random.weight);
                 break;
             case 6 :
+                System.out.println("DYNAMIC");
                 DynamicProgrammingController dynamic = new DynamicProgrammingController();
                 begining = Date.from(Instant.now()).getTime();
                 dynamic.resolveTable(matrice);
                 timeForResoltion = Date.from(Instant.now()).getTime() - begining;
+                System.out.println("TIME : " + timeForResoltion + " millisecondes");
+                path = dynamic.path.toString();
+                System.out.println("PATH : " + path);
+                System.out.println("COST : " + dynamic.weight);
                 break;
             default :
                 GeneticController genetic = new GeneticController();

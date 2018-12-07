@@ -6,10 +6,11 @@ import java.util.ArrayList;
 import tsp.models.Graph;
 
 public class RandomController implements SolutionControllerInterface {
+    
+    public ArrayList<Integer> path = new ArrayList<>();
+    public Double weight = 0.0;
 
     @Override
-
-
     public void resolveGraph(Graph basicGraph) {
         
     }
@@ -17,9 +18,7 @@ public class RandomController implements SolutionControllerInterface {
     @Override
     public void resolveTable(Double[][] table) {
         boolean inPath;
-        Double weight = 0.0;
         int length = table[0].length;
-        ArrayList<Integer> path = new ArrayList<>();
         int firstVertex;
         int random1;
         int random2=0;
@@ -44,8 +43,6 @@ public class RandomController implements SolutionControllerInterface {
         }
         path.add(firstVertex);
         weight+= table[random2][firstVertex];
-        System.out.println("Path : " + path.toString() + ", Weight : " + weight);
-
     }
 
 }

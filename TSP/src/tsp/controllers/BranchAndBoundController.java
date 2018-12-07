@@ -9,7 +9,7 @@ import tsp.models.Vertex;
 
 public class BranchAndBoundController implements SolutionControllerInterface{
     
-    public List<Vertex> noeudDejaVisite = new ArrayList<>();
+    public List<Vertex> nodesVisited = new ArrayList<>();
     
     @Override
     public void resolveGraph(Graph basicGraph) {}
@@ -20,8 +20,8 @@ public class BranchAndBoundController implements SolutionControllerInterface{
         int size = matrice.length;
         
         Map<Vertex, Double[][]> reducedMatrixForEachNode = new HashMap();
-        if(noeudDejaVisite.isEmpty()){
-            noeudDejaVisite.add(new Vertex(1));
+        if(nodesVisited.isEmpty()){
+            nodesVisited.add(new Vertex(1));
         }
         List<Vertex> nodesToVisit = getAllNodesToVisit(matrice);
 
@@ -77,7 +77,7 @@ public class BranchAndBoundController implements SolutionControllerInterface{
                 }
             }
             
-            int x = noeudDejaVisite.get(noeudDejaVisite.size()-1).getIdVertex()-1;
+            int x = nodesVisited.get(nodesVisited.size()-1).getIdVertex()-1;
             int y = prochaineVille.getIdVertex()-1;
             if(x != y ){
                 prochaineVille.setWeight(prochaineVille.getWeight() + matrice[x][y]);
@@ -98,9 +98,9 @@ public class BranchAndBoundController implements SolutionControllerInterface{
             Map.Entry<Vertex, Double[][]> e = smallerVerteces.entrySet().iterator().next();
             
             for(int j = 0; j < size; j++){
-                e.getValue()[noeudDejaVisite.get(noeudDejaVisite.size()-1).getIdVertex()-1][j] = Double.POSITIVE_INFINITY;
+                e.getValue()[nodesVisited.get(nodesVisited.size()-1).getIdVertex()-1][j] = Double.POSITIVE_INFINITY;
             }
-            noeudDejaVisite.add(e.getKey());
+            nodesVisited.add(e.getKey());
             // on nettoie le reste de la matrice
             for(int i = 0; i < size; i++){
                 for(int j = 0; j < size; j++){
@@ -120,7 +120,7 @@ public class BranchAndBoundController implements SolutionControllerInterface{
 
     private boolean iAndJInFinalPath(int i, int j) {
         List<Integer> villesVisitees = new ArrayList<>();
-        noeudDejaVisite.forEach(v -> {
+        nodesVisited.forEach(v -> {
             villesVisitees.add(v.getIdVertex());
         });
         if(villesVisitees.contains(i+1) && villesVisitees.contains(j+1)){
@@ -143,8 +143,8 @@ public class BranchAndBoundController implements SolutionControllerInterface{
             if(t){
                 Vertex v = new Vertex(i + 1);
                 Boolean nodeInList = false;
-                for(int k=0; k< noeudDejaVisite.size(); k++){
-                    if(noeudDejaVisite.get(k).getIdVertex().equals(v.getIdVertex())){
+                for(int k=0; k< nodesVisited.size(); k++){
+                    if(nodesVisited.get(k).getIdVertex().equals(v.getIdVertex())){
                         nodeInList = true;
                         break;
                     }
